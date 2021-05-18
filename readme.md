@@ -30,6 +30,6 @@ Os arquivos OFX estão na pasta ``\OFX``.
 - [ ] Não hospede sua aplicação ou parte dela em nenhum lugar. Sua aplicação deverá rodar localmente sem depender de serviços externos.
 
 ## Envio da solução
-Você deverá criar um fork deste repositório, incluir o seu código fonte na pasta ``SRC``,  preencher o formulário "_about/Profile.md" e enviar para rh@auvo.com.br o link do seu fork.
+Você deverá criar um fork deste repositório, incluir o seu código fonte na pasta ``SRC``,  preencher o formulário "_about/Profile.md" e enviar para o email do seu recrutador o link do seu fork.
 
 Desejamos a você uma ótima experiência code.
