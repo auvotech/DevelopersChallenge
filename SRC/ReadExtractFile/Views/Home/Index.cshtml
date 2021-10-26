@@ -1,0 +1,106 @@
+﻿@model IEnumerable<FinancialTransaction>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="col-sm-12">
+    <form asp-controller="home" asp-action="ReadFiles" method="post" enctype="multipart/form-data" class="form-inline">
+        <div class="col-sm-10">
+            <input class="form-control form-control-lg" name="fileupload" type="file" multiple style="width:100%;height:55px" />
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" class="btn btn-primary" value="Ler Arquivos" />
+        </div>
+    </form>
+
+    <br />
+    <br />
+
+    <div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+        <div class="alert alert-danger col-sm-12" id="msg">
+            @Html.Raw(ViewBag.ErrorMessage)           
+        </div>
+
+            if (Model.Count() == 0)
+            {
+                @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-primary" })
+            }
+        }
+
+        @if (@Model.Count() > 0)
+        {
+            <br />
+            <form class="form-inline" asp-controller="home" asp-action="SearchTransactions" method="post">
+                <div><input type="date" class="form-control" id="initdt" name="FromDate" /></div>&nbsp;&nbsp;
+                <div><input type="date" class="form-control" id="enddt" name="ToDate" /></div>&nbsp;
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+
+            <br />
+            <table class="table table-striped" id="table_id">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Obs</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dataTransaction in Model)
+                    {
+                        <tr>
+                            <th scope="row">@dataTransaction.ID_TRANSACTION</th>
+                            <td>@dataTransaction.TRNTYPE</td>
+                            <td>@dataTransaction.TRNAMT</td>
+                            <td>@dataTransaction.DTPOSTED.ToShortDateString()</td>
+                            <td>@dataTransaction.MEMO</td>
+                            <td>@dataTransaction.OBS</td>
+                            <td>@Html.ActionLink("Edit", "GetTransaction", "Home", new { id = dataTransaction.ID_TRANSACTION }, new { data_modal = "" })</td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        <br />
+    </div>
+
+    <div id='myModal' class='modal fade in'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({ cache: false });
+        $("a[data-modal]").on("click", function (e) {
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+            });
+            return false;
+        });
+    });
+
+    //$(document).ready(function () {
+    //    setTimeout(function () {
+    //        $("#msg").fadeOut();
+    //    }, 5000);
+    //});
+</script>
+
