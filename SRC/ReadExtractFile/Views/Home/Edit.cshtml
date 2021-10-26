@@ -1,0 +1,52 @@
+﻿@model FinancialTransaction
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div class="col-lg-12">
+        <h3>Transaction</h3>        
+
+        <form asp-controller="home" asp-action="EditObs" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" id="txtId" name="ID_TRANSACTION" value="@Model.ID_TRANSACTION" readonly="readonly" style="display:none" />
+
+                <b>Tipo:</b>
+                <input type="text" class="form-control" id="txt_Type" name="TRNTYPE" value="@Model.TRNTYPE" readonly="readonly" />
+
+                <b>Valor:</b>
+                <input type="text" class="form-control" id="txt_Value" name="TRNAMT" value="@Model.TRNAMT" readonly="readonly" />
+
+                <b>Data:</b>
+                <input type="text" class="form-control" id="txt_Date" name="DTPOSTED" value="@Model.DTPOSTED.ToShortDateString()" readonly="readonly" />
+
+                <b>Descrição:</b>
+                <input type="text" class="form-control" id="txt_MEMO" name="MEMO" value="@Model.MEMO" readonly="readonly" />
+
+                <b><label for="TextObs" class="form-label">Observation</label></b>
+                <textarea class="form-control" id="TextObs" rows="3" name="OBS"></textarea>
+            </div>
+
+            <div class="text-right">
+                @Html.ActionLink("Fechar", "Index", "Home", null, new { @class = "btn btn-secondary" })
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+            <br />
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger col-sm-12" id="msg">
+                    @Html.Raw(ViewBag.ErrorMessage)
+                </div>                
+            }
+        </form>
+    </div>
+</body>
+</html>
