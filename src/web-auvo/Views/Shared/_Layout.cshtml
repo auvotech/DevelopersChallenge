@@ -14,29 +14,9 @@
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
-
-    <script>
-
-        $(document).ready(function () {
-            $('#table_id').DataTable({
-                "dom": '<"toolbar">frtip',
-
-                "language": {
-                    "lengthMenu": "Itens exibidos  _MENU_ ",
-                    "sSearch": "Pesquisar",
-                    "info": "Exibindo _START_ de _END_ itens",
-                    'paginate': {
-                        'previous': 'Voltar',
-                        'next': 'Próximo'
-                    }
-
-                }
-            });
-                $("div.toolbar").html('<button class="btn">Importar Arquivo</button>');
-
-        });
-
-    </script>
+    <script src="~/js/extratoDataTable.js"></script>
+    <script src="~/js/estilizar-input-file.js"></script>
+    <script src="~/js/lerArquivoOfx.js"></script>
 
 </head>
 
