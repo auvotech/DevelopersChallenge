@@ -37,11 +37,11 @@ namespace auvo.Application.Services
             for (int ctr = 0; ctr < historicos.Count; ctr++)
             {
                 Transacao transacao = new Transacao();
-                transacao.Valor = ObterItemTransacao("(?<=<TRNAMT>).*?(?=<MEMO>)", historicos[ctr].Value);
+                transacao.Valor = float.Parse(ObterItemTransacao("(?<=<TRNAMT>).*?(?=<MEMO>)", historicos[ctr].Value));
                 transacao.Descricao = ObterItemTransacao("(?<=<MEMO>).*?(?=)", historicos[ctr].Value);
                 transacao.Operacao = ObterItemTransacao("(?<=<TRNTYPE>).*?(?=<DTPOSTED>)", historicos[ctr].Value);
                 string data = ObterItemTransacao("(?<=<DTPOSTED>).*?(?=<TRNAMT>)", historicos[ctr].Value).Substring(0, 8);
-                transacao.DataLancamento = Convert.ToDateTime(data);
+                transacao.DataLancamento = DateTime.ParseExact(data, "yyyyMMdd", null);
                 transacoes.Add(transacao);
             }
 

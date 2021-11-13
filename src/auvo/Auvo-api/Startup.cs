@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using DevelopersChallenge.src.auvo.Persistence.Repository;
+using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_auvo
 {
@@ -22,6 +24,9 @@ namespace api_auvo
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<AuvoContext>(options => options
+            .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ITransacaoService, TransacaoService>();
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();

@@ -14,7 +14,7 @@ namespace Domain.Entities
 
         public DateTime DataLancamento { get; set; }
 
-        public string Valor { get; set; }
+        public float Valor { get; set; }
 
         public string Descricao { get; set; }
     }
