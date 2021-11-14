@@ -32,14 +32,27 @@ namespace api_auvo
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();
 
             services.AddControllers();
+
+            services.AddCors();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "api_auvo", Version = "v1" });
             });
+
+            services.AddCors();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseCors(options =>
+                  options.WithOrigins("http://localhost:4200")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,6 +70,8 @@ namespace api_auvo
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }
