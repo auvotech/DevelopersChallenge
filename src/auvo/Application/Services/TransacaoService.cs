@@ -54,5 +54,20 @@ namespace auvo.Application.Services
 
             return _transacaoRepository.SalvarTransacoes(transacoes);
         }
+
+        public IEnumerable<Transacao> ObterTransacoes()
+        {
+            return _transacaoRepository.ObterTransacoes();
+        }
+
+        public Transacao ObterTransacao(int id)
+        {
+            return _transacaoRepository.ObterTransacao(id);
+        }
+
+        public int InserirObservacao(int id,string observacao)
+        {
+            return _transacaoRepository.InserirObservacao(id,observacao);
+        }
     }
 }

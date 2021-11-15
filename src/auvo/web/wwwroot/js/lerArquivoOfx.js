@@ -27,18 +27,7 @@ function salvarArquivos(historico) {
                 return JSON.stringify(objectToSend)
             },
         },
-        "columns": [
-            { "data": "valor" },
-            {
-                "data": "dataLancamento",
-
-                "render":function(data){
-                    return data
-                }
-            }
-
-        ]
-        ,
+        "columns":coluns,
     });
     $("div.toolbar").html(' </b> <br><input type="file" class="fileInput" multiple>  <br> <button   onclick="handleFileSelect()" id="btn-include-file" class="btn">Importar</button>');
 
