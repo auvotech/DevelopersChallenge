@@ -15,6 +15,8 @@ namespace DevelopersChallenge.src.auvo.Domain.Interfaces.IRepositorys
          Transacao ObterTransacao(int id);
 
          int InserirObservacao(int id, string observacao);
+
+         int DeletarArquivos();
     }
 
 

@@ -29,6 +29,6 @@ function salvarArquivos(historico) {
         },
         "columns":coluns,
     });
-    $("div.toolbar").html(' </b> <br><input type="file" class="fileInput" multiple>  <br> <button   onclick="handleFileSelect()" id="btn-include-file" class="btn">Importar</button>');
+    $("div.toolbar").html(' </b> <br><input type="file" class="fileInput" multiple>  &nbsp&nbsp<br> <button   onclick="handleFileSelect()" id="btn-include-file" class="btn btn-sm btn-primary"><i class="fas fa-file-upload"></i></button>&nbsp&nbsp<button onclick="deletarArquivos()" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button> <br><br>');
 
 }

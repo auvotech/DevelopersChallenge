@@ -13,6 +13,8 @@ namespace auvo.Application.Interface
 
         Transacao ObterTransacao(int id);
 
+        int DeletarArquivos();
+
         int InserirObservacao(int id, string observacao);
     }
 

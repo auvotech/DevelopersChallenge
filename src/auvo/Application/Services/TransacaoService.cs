@@ -69,5 +69,10 @@ namespace auvo.Application.Services
         {
             return _transacaoRepository.InserirObservacao(id,observacao);
         }
+
+        public int DeletarArquivos()
+        {
+            return _transacaoRepository.DeletarArquivos();
+        }
     }
 }

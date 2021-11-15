@@ -6,9 +6,8 @@ function obterTransacao(id) {
         .done(function (result) {
             $("#operacao").html(result.operacao == "DEBIT" ? "Débito" : "Crédito");
             $("#descricao").html(result.descricao);
-
-            
-            //console.log(result)
+            $("#idTransacao").html(result.id);
+            $("#observacaoText").html(result.observacao);
         })
 }
 
@@ -21,6 +20,11 @@ var dataTableProperts = {
     "dom": '<"toolbar">frtip',
     "language": {
         "lengthMenu": "Itens exibidos  _MENU_ ",
+        "zeroRecords": "Nenhum registro correspondente encontrado",
+        "infoEmpty": "0 Registro",
+        "infoFiltered": "",
+
+
         "sSearch": "Pesquisar",
         "info": "Exibindo _START_ de _END_ itens",
         'paginate': {
@@ -31,12 +35,22 @@ var dataTableProperts = {
 }
 
 var coluns = [
-    { "data": "valor" },
+    {
+        "data": "valor",
+        "render": function (data) {
+
+            data = data.toString();
+            let dataFormatada = parseFloat(data.substring(0, data.length - 2) + "." + data.slice(-2))
+                .toLocaleString({ minimumFractionDigits: 2 });
+                
+            return dataFormatada.includes("-") ? ` <span style="color:red">R$ ${dataFormatada}</span>` : ` <span style="color:#446744">R$ ${dataFormatada}</span>`;
+        }
+    },
     {
         "data": "dataLancamento",
 
         "render": function (data) {
-            return data
+            return moment(data).format("DD/MM/YYYY")
         }
     },
 
@@ -44,8 +58,7 @@ var coluns = [
         "data": "id",
 
         "render": function (id) {
-            //return "<a> </a>"
-            return `<button type='button' onclick='obterTransacao(${id})' class='btn ' data-toggle='modal' data-target='#exampleModal'>🔎 </button>`
+            return `<button type='button' onclick='obterTransacao(${id})' class='btn ' data-toggle='modal' data-target='#exampleModal'><i class="fas fa-search"></i> </button>`
         }
     }
 

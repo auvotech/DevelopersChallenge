@@ -48,7 +48,15 @@ namespace api_auvo.Controllers
         public ActionResult InserirObservacao(int id, [FromBody] Transacao transacao)
         {
 
-            _transacaoService.InserirObservacao(id,transacao.Observacao);
+            _transacaoService.InserirObservacao(id, transacao.Observacao);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult DeletarArquivos()
+        {
+
+            _transacaoService.DeletarArquivos();
             return Ok();
         }
 

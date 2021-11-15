@@ -34,14 +34,52 @@
       </div>
       <div class="modal-body">
         <ul class="list-group">
-          <li class="list-group-item">Operação: <span id="operacao"></span> </li>
-          <li class="list-group-item">Descricão:  <span id="descricao"></span></li>
-        </ul>
+          <li class="list-group-item"><strong>Operação:</strong> <span id="operacao"></span> </li>
+          <li class="list-group-item"><strong>Descricão:</strong> <span id="descricao"></span></li>
+          <li class="list-group-item"><strong>Observação:</strong> <span id="observacaoText"></span></li>
+
+        </ul><br>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Observação</span>
+          </div>
+          <input type="text" id="observacao" class="form-control" aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <span style="display: none;" id="idTransacao"></span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar Alterações</button>
+        <button type="button" onclick="salvarObservacao()" class="btn btn-primary">Salvar Alterações</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function salvarObservacao() {
+    let observacao = document.getElementById('observacao').value;
+
+    let idTransacao = document.getElementById('idTransacao').innerText;
+
+    let data = { "observacao": observacao }
+
+    console.log(JSON.stringify(data))
+
+    if (observacao == "") {
+      return;
+    }
+    $.ajax({
+      method: "PUT",
+      url: `https://localhost:5001/transacao/${idTransacao}`,
+      contentType: 'application/json',
+      data: JSON.stringify(data)
+    })
+      .done(function (result) {
+        $('#exampleModal').modal('hide')
+
+        alert("Observação salva com sucesso!")
+      })
+  }
+
+</script>

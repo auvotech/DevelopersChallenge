@@ -42,11 +42,23 @@ namespace DevelopersChallenge.src.auvo.Persistence.Repository
             return transacao;
         }
 
-        public int InserirObservacao(int id,string observacao)
+        public int InserirObservacao(int id, string observacao)
         {
             var transacao = _auvoContext.Transacao.FirstOrDefault(x => x.Id == id);
 
             transacao.Observacao = observacao;
+
+            return _auvoContext.SaveChanges();
+
+        }
+
+        public int DeletarArquivos()
+        {
+            foreach (var entity in _auvoContext.Transacao)
+            {
+                _auvoContext.Transacao.Remove(entity);
+
+            }
 
             return _auvoContext.SaveChanges();
 
